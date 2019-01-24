@@ -6,6 +6,25 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+
+    </style>
+
+
+    <style name="NosePadButtons">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorButtonFont</item>
+        <item name="android:background">@drawable/button_rect_round</item>
+
+    </style>
+
+
+    <style name="NosePadTextView">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorTextViewFont</item>
+
+
     </style>
 
 </resources>
