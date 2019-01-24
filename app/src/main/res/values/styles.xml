@@ -21,10 +21,15 @@
 
 
     <style name="NosePadTextView">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">22sp</item>
         <item name="android:textColor">@color/colorTextViewFont</item>
 
 
+    </style>
+
+    <style name="splash_screen">
+        <item name="android:padding">0dp</item>
+        <item name="android:windowFrame">@null</item>
     </style>
 
 </resources>
