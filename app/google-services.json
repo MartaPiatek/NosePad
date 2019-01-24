@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "520368351946",
+    "firebase_url": "https://nosepad.firebaseio.com",
+    "project_id": "nosepad",
+    "storage_bucket": "nosepad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520368351946:android:3c74db66f97f57d0",
+        "android_client_info": {
+          "package_name": "pl.martapiatek.nosepad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "520368351946-tj4kaqn1g4oh7998oonrptlbr50c5v9q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2YNiBLRKsNtlymVpJLDzfTJwaWt1pPhg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
