@@ -19,7 +19,19 @@
 
     </style>
 
+    <style name="NosePadButtonsWhite">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorBackground</item>
+        <item name="android:background">@drawable/button_rect_round_white</item>
 
+    </style>
+
+    <style name="NosePadButtonsRed">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@drawable/button_rect_round_red</item>
+
+    </style>
     <style name="NosePadTextView">
         <item name="android:textSize">22sp</item>
         <item name="android:textColor">@color/colorTextViewFont</item>

@@ -17,5 +17,6 @@
     <color name="rating4">#f25759</color>
 
 
-    <color name="colorRed">#D84440</color>
+    <color name="colorRed">#FF4081</color>
+    <color name="colorWhite">#ffffff</color>
 </resources>
