@@ -223,6 +223,7 @@
         android:foregroundGravity="center_vertical|center_horizontal"
         android:max="5"
         android:rating="3"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/guideline9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline10"

@@ -20,7 +20,7 @@
         android:layout_weight="0.8"
         android:background="@color/back"
         android:backgroundTint="@color/back"
-        android:src="@drawable/shalimarek" />
+        android:src="@drawable/logo" />
 
     <Space
         android:layout_width="match_parent"

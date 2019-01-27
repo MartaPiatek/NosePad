@@ -9,6 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".AllReviewsActivity"
+            android:label="@string/title_activity_all_reviews"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pl.martapiatek.nosepad.MainActivity" />
+        </activity>
         <activity android:name=".FirstActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,9 +27,19 @@
         <activity android:name=".SplashActivity" />
         <activity
             android:name=".AddReviewActivity"
-            android:label="@string/title_activity_add_review" />
-        <activity android:name=".LoginActivity">
-
+            android:label="Dodaj recenzję"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pl.martapiatek.nosepad.MainActivity" />
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="Logowanie"
+            android:parentActivityName=".FirstActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pl.martapiatek.nosepad.FirstActivity" />
         </activity>
         <activity
             android:name=".MainActivity"

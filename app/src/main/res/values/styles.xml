@@ -35,8 +35,12 @@
     <style name="NosePadTextView">
         <item name="android:textSize">22sp</item>
         <item name="android:textColor">@color/colorTextViewFont</item>
+    </style>
 
-
+    <style name="NosePadEditText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:backgroundTint">@color/colorWhite</item>
     </style>
 
     <style name="splash_screen">
