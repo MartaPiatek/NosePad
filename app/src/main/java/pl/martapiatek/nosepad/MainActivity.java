@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
                     return true;
                 case R.id.navigation_show_review:
+                    Intent intentShowReviews = new Intent(MainActivity.this, AllReviewsActivity.class);
+                    startActivity(intentShowReviews);
 
                     return true;
 
