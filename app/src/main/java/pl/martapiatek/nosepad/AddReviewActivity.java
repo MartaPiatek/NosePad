@@ -61,15 +61,15 @@ public class AddReviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_review);
 
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        btnAddReview = (Button) findViewById(R.id.btnAddReview);
-        edtDescription = (EditText) findViewById(R.id.edtDescription);
-        autoCompleteBrand = (AutoCompleteTextView) findViewById(R.id.autoCompleteBrand);
-        autoCompleteFragrance = (AutoCompleteTextView) findViewById(R.id.autoCompleteFragrance);
-        multiAutoCompleteNotes = (MultiAutoCompleteTextView) findViewById(R.id.multiAutoCompleteNotes);
-        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        btnAddReview = findViewById(R.id.btnAddReview);
+        edtDescription = findViewById(R.id.edtDescription);
+        autoCompleteBrand = findViewById(R.id.autoCompleteBrand);
+        autoCompleteFragrance = findViewById(R.id.autoCompleteFragrance);
+        multiAutoCompleteNotes = findViewById(R.id.multiAutoCompleteNotes);
+        ratingBar = findViewById(R.id.ratingBar);
 
 
         mAuth = FirebaseAuth.getInstance();
