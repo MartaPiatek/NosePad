@@ -1,20 +1,12 @@
 package pl.martapiatek.nosepad;
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Handler;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,14 +15,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class LoginActivity extends AppCompatActivity implements Runnable {
+public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private Button btnLogin;
     private EditText edtEmail, edtPassword;
 
-    private Handler handler;
-    private Dialog splashDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +28,7 @@ public class LoginActivity extends AppCompatActivity implements Runnable {
         setContentView(R.layout.activity_login);
 
 
-        showSplashScreen();
-        handler = new Handler();
-        AsyncTask.execute(this);
+
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -49,12 +37,14 @@ public class LoginActivity extends AppCompatActivity implements Runnable {
         edtEmail = (EditText) findViewById(R.id.edtLogin);
         edtPassword = (EditText) findViewById(R.id.edtPassword);
 
+        edtEmail.setText("martusia.piatek@gmail.com");
+        edtPassword.setText("marta123");
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                edtEmail.setText("martusia.piatek@gmail.com");
-                edtPassword.setText("marta123");
+
 
                 mAuth.signInWithEmailAndPassword(edtEmail.getText().toString(), edtPassword.getText().toString())
                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
@@ -72,15 +62,19 @@ public class LoginActivity extends AppCompatActivity implements Runnable {
                                     //  btnLogin.setEnabled(true);
                                 } else {
 
-                                    //Toast.makeText(LoginActivity.this, "Błąd logowania", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(LoginActivity.this, "Błąd logowania", Toast.LENGTH_LONG).show();
 
 
-                                    LayoutInflater inflater = getLayoutInflater();
+                               /*     LayoutInflater inflater = getLayoutInflater();
                                     View layout = inflater.inflate(R.layout.toast,
                                             (ViewGroup) findViewById(R.id.toast_layout_root));
                                     layout.setBackground(getDrawable(R.drawable.toast_background));
 
 
+
+                                    MyToast myToast = new MyToast(getApplicationContext(), "Błąd logowania! \nPodałeś nieprawidłowe dane!", layout);
+                                    myToast.show();
+                                    /*
                                     TextView text = (TextView) layout.findViewById(R.id.text);
                                     text.setText("Błąd logowania! \nPodałeś nieprawidłowe dane!");
                                     text.setTextSize(20);
@@ -90,7 +84,7 @@ public class LoginActivity extends AppCompatActivity implements Runnable {
                                     toast.setDuration(Toast.LENGTH_SHORT);
                                     toast.setView(layout);
                                     toast.show();
-
+*/
                                 }
 
 
@@ -101,41 +95,5 @@ public class LoginActivity extends AppCompatActivity implements Runnable {
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mAuth = FirebaseAuth.getInstance();
-    }
 
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        dismissSplashScreen();
-    }
-
-    private void showSplashScreen() {
-        splashDialog = new Dialog(this, R.style.splash_screen);
-        splashDialog.setContentView(R.layout.activity_splash);
-        splashDialog.setCancelable(false);
-        splashDialog.show();
-    }
-
-    private void dismissSplashScreen() {
-        if (splashDialog != null) {
-            splashDialog.dismiss();
-            splashDialog = null;
-        }
-    }
-
-    @Override
-    public void run() {
-        handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    dismissSplashScreen();
-                                }
-                            }, 3000
-        );
-    }
 }

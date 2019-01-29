@@ -1,23 +1,25 @@
 package pl.martapiatek.nosepad;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.MultiAutoCompleteTextView;
+import android.widget.RatingBar;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 import pl.martapiatek.nosepad.model.Review;
 
@@ -27,6 +29,10 @@ public class AddReviewActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private Button btnAddReview;
     private FirebaseUser user;
+    private AutoCompleteTextView autoCompleteBrand, autoCompleteFragrance;
+    private EditText edtDescription;
+    private RatingBar ratingBar;
+    private MultiAutoCompleteTextView multiAutoCompleteNotes;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -35,9 +41,15 @@ public class AddReviewActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_add_review:
+                    //    Intent intentAddReview = new Intent(MainActivity.this, AddReviewActivity.class);
+                    //   startActivity(intentAddReview);
 
                     return true;
                 case R.id.navigation_show_review:
+                    Intent intentShowReviews = new Intent(AddReviewActivity.this, AllReviewsActivity.class);
+                    startActivity(intentShowReviews);
+
+                    return true;
             }
             return false;
         }
@@ -53,103 +65,44 @@ public class AddReviewActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         btnAddReview = (Button) findViewById(R.id.btnAddReview);
+        edtDescription = (EditText) findViewById(R.id.edtDescription);
+        autoCompleteBrand = (AutoCompleteTextView) findViewById(R.id.autoCompleteBrand);
+        autoCompleteFragrance = (AutoCompleteTextView) findViewById(R.id.autoCompleteFragrance);
+        multiAutoCompleteNotes = (MultiAutoCompleteTextView) findViewById(R.id.multiAutoCompleteNotes);
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 
 
         mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
         user = mAuth.getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference("reviews").child(user.getUid());
+
 
         btnAddReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
-                //     mDatabase.child("reviews/").child(user.getUid()).child(review.getBrand()).child(review.getFragrance()).child("description").setValue(review.getDescription());
-                //   mDatabase.child("reviews/").child(user.getUid()).child(review.getBrand()).child(review.getFragrance()).child("rating").setValue(review.getRating());
-
-
-                final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("reviews");
-
                 String key = mDatabase.push().getKey();
 
-                Review review = new Review("Prada", "Candy", "Cytrynka", "Fajniutkie", 4);
+                Review review = new Review(
+                        autoCompleteBrand.getText().toString(),
+                        autoCompleteFragrance.getText().toString(),
+                        multiAutoCompleteNotes.getText().toString(),
+                        edtDescription.getText().toString(),
+                        ratingBar.getRating());
 
-
-                mDatabase.child(user.getUid()).child(key).setValue(review);
-
-                review = new Review("Prada22", "Candy222", "Cytrynka222", "Fajniutkie222", 22);
-
-                key = mDatabase.push().getKey();
-                mDatabase.child(user.getUid()).child(key).setValue(review);
-
-                //     Review review2 = new Review("Prada", "Candy2222","Cytrynk232323a","Fajniutki32323e", 2);
-
-
-              /*  mDatabase.child("reviews/").child(user.getUid()).child(review2.getBrand()).child(review2.getFragrance()).child("description").setValue(review2.getDescription());
-                mDatabase.child("reviews/").child(user.getUid()).child(review2.getBrand()).child(review2.getFragrance()).child("rating").setValue(review2.getRating())
+                mDatabase.child(key).setValue(review)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(AddReviewActivity.this, "zapisano", Toast.LENGTH_SHORT).show();
-                    }
-                })
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(AddReviewActivity.this, "zapisano", Toast.LENGTH_SHORT).show();
+                            }
+                        })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Toast.makeText(AddReviewActivity.this, "błąd", Toast.LENGTH_SHORT).show();
                             }
                         });
-
-*/
-
-                final ArrayList<String> keys = new ArrayList<>();
-
-                mDatabase.child(user.getUid()).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                            Log.i("REVIEW DS", "KEY: " + ds.getKey());
-                            keys.add(ds.getKey());
-                            Log.i("REVIEW", "keys size" + keys.size());
-                        }
-
-                        //Review reviewRead = dataSnapshot.getValue(Review.class);
-
-                        //  Log.i("REVIEW", "User name: " + reviewRead.getBrand() + ", email " + reviewRead.getFragrance());
-                        //   Log.i("REVIEW", "KEY: " + dataSnapshot.getKey());
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError error) {
-                        // Failed to read value
-                        Log.i("REVIEW", "Failed to read value.", error.toException());
-                    }
-                }); // koniec onClick Litenera
-
-                for (String s : keys) {
-                    mDatabase.child(user.getUid()).child(s).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-
-                            Review reviewRead = dataSnapshot.getValue(Review.class);
-
-                            Log.i("REVIEW", "Brand: " + reviewRead.getBrand() + ", Fragrance " + reviewRead.getFragrance()
-                                    + ", Description " + reviewRead.getDescription() + ", notes " + reviewRead.getNotes()
-                                    + ", Rating " + reviewRead.getRating());
-                            //   Log.i("REVIEW", "KEY: " + dataSnapshot.getKey());
-
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError error) {
-                            // Failed to read value
-                            Log.i("REVIEW", "Failed to read value.", error.toException());
-                        }
-                    });
-                }
 
             }
         });

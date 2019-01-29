@@ -44,7 +44,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
     <AutoCompleteTextView
-        android:id="@+id/edtBrand"
+        android:id="@+id/autoCompleteBrand"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -80,7 +80,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <AutoCompleteTextView
-        android:id="@+id/edtFragrance"
+        android:id="@+id/autoCompleteFragrance"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -90,7 +90,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline10"
-        app:layout_constraintTop_toBottomOf="@+id/edtBrand" />
+        app:layout_constraintTop_toBottomOf="@+id/autoCompleteBrand" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline6"
@@ -115,7 +115,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
     <MultiAutoCompleteTextView
-        android:id="@+id/edtNotes"
+        android:id="@+id/multiAutoCompleteNotes"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"

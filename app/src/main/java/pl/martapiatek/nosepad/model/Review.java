@@ -2,32 +2,22 @@ package pl.martapiatek.nosepad.model;
 
 public class Review {
 
-    private int key;
     private String brand;
     private String fragrance;
     private String notes;
     private String description;
-    private int rating;
+    private float rating;
 
 
     public Review() {
     }
 
-    public Review(String brand, String fragrance, String notes, String description, int rating) {
+    public Review(String brand, String fragrance, String notes, String description, float rating) {
         this.brand = brand;
         this.fragrance = fragrance;
         this.notes = notes;
         this.description = description;
         this.rating = rating;
-    }
-
-
-    public int getKey() {
-        return key;
-    }
-
-    public void setKry(int key) {
-        this.key = key;
     }
 
     public String getBrand() {
@@ -62,11 +52,11 @@ public class Review {
         this.description = description;
     }
 
-    public int getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 }
