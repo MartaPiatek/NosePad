@@ -33,9 +33,9 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        btnLogin = (Button) findViewById(R.id.btnLogin);
-        edtEmail = (EditText) findViewById(R.id.edtLogin);
-        edtPassword = (EditText) findViewById(R.id.edtPassword);
+        btnLogin = findViewById(R.id.btnLogin);
+        edtEmail = findViewById(R.id.edtLogin);
+        edtPassword = findViewById(R.id.edtPassword);
 
         edtEmail.setText("martusia.piatek@gmail.com");
         edtPassword.setText("marta123");
@@ -72,8 +72,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-                                    MyToast myToast = new MyToast(getApplicationContext(), "Błąd logowania! \nPodałeś nieprawidłowe dane!", layout);
-                                    myToast.show();
+
                                     /*
                                     TextView text = (TextView) layout.findViewById(R.id.text);
                                     text.setText("Błąd logowania! \nPodałeś nieprawidłowe dane!");

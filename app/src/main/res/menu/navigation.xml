@@ -15,10 +15,5 @@
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="Przeglądaj recenzje" />
 
-    <item
-        android:id="@+id/navigation_allegro"
-        android:icon="@drawable/ic_shopping"
-        android:title="Allegro" />
-
 
 </menu>

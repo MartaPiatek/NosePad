@@ -50,9 +50,9 @@ public class ReviewAdapter extends ArrayAdapter<Review> {
 
         final Review currentReview = getItem(position);
 
-        txtBrand = (TextView) listItemView.findViewById(R.id.txtBrand);
-        txtFragrance = (TextView) listItemView.findViewById(R.id.txtFragrance);
-        txtRating = (TextView) listItemView.findViewById(R.id.txtRating);
+        // txtBrand = (TextView) listItemView.findViewById(R.id.txtBrand);
+        txtFragrance = listItemView.findViewById(R.id.txtFragrance);
+        txtRating = listItemView.findViewById(R.id.txtRating);
 
         txtBrand.setText(currentReview.getBrand());
         txtFragrance.setText(currentReview.getFragrance());

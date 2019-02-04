@@ -73,20 +73,20 @@ public class ReviewSectionAdapter extends BaseAdapter {
         switch (getItemViewType(i)) {
             case REVIEW_ITEM:
                 TextView txtBrand, txtFragrance, txtRating;
-                txtBrand = (TextView) view.findViewById(R.id.txtBrand);
-                txtFragrance = (TextView) view.findViewById(R.id.txtFragrance);
-                txtRating = (TextView) view.findViewById(R.id.txtRating);
+                // txtBrand = (TextView) view.findViewById(R.id.txtBrand);
+                txtFragrance = view.findViewById(R.id.txtFragrance);
+                txtRating = view.findViewById(R.id.txtRating);
 
                 final Review currentReview = (Review) list.get(i);
 
-                txtBrand.setText(currentReview.getBrand());
+                //  txtBrand.setText(currentReview.getBrand());
                 txtFragrance.setText(currentReview.getFragrance());
                 txtRating.setText(String.valueOf(currentReview.getRating()));
 
                 break;
 
             case HEADER:
-                TextView txtTitle = (TextView) view.findViewById(R.id.txtTitle);
+                TextView txtTitle = view.findViewById(R.id.txtTitle);
 
                 txtTitle.setText((String) list.get(i));
                 break;

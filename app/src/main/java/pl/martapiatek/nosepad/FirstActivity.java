@@ -57,42 +57,15 @@ public class FirstActivity extends AppCompatActivity implements Runnable {
             }
         });
 
-        //uploadBrands();
+        //  uploadBrands();
         //uploadNotes();
 
+
     }
 
-    private void uploadBrands() {
-        mDatabase = FirebaseDatabase.getInstance().getReference("brands");
-        ArrayList<String> brands = new ArrayList<>();
-        InputStream input = getResources().openRawResource(R.raw.brands);
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(input)
-        );
-        String line = "";
-        try {
 
-            reader.readLine();
 
-            while ((line = reader.readLine()) != null) {
 
-                brands.add(line);
-
-            }
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
-        }
-
-        Log.i("BRAND", "Size: " + brands.size());
-
-        for (String brand : brands) {
-            String key = mDatabase.push().getKey();
-            mDatabase.child(key).setValue(brand);
-            Log.i("BRAND", "name: " + brand);
-        }
-    }
 
     private void uploadNotes() {
         mDatabase = FirebaseDatabase.getInstance().getReference("notes");

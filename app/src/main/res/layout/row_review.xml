@@ -5,19 +5,11 @@
     android:padding="5dp">
 
     <TextView
-        android:id="@+id/txtBrand"
-        style="@style/NosePadTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Marka" />
-
-    <TextView
         android:id="@+id/txtFragrance"
         style="@style/NosePadTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="3"
         android:text="Zapach" />
 
     <TextView
@@ -26,5 +18,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Ocena" />
+        android:text="Ocena"
+        android:textAlignment="textEnd" />
 </LinearLayout>

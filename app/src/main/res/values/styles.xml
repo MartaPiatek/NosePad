@@ -6,32 +6,34 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="windowNoTitle">true</item>
+        <item name="windowNoTitle">false</item>
         <item name="android:windowFullscreen">true</item>
 
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
     <style name="NosePadButtons">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/colorButtonFont</item>
         <item name="android:background">@drawable/button_rect_round</item>
-
     </style>
 
     <style name="NosePadButtonsWhite">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/colorBackground</item>
         <item name="android:background">@drawable/button_rect_round_white</item>
-
     </style>
 
     <style name="NosePadButtonsRed">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:background">@drawable/button_rect_round_red</item>
-
     </style>
+
     <style name="NosePadTextView">
         <item name="android:textSize">22sp</item>
         <item name="android:textColor">@color/colorTextViewFont</item>
@@ -46,6 +48,14 @@
     <style name="splash_screen">
         <item name="android:padding">0dp</item>
         <item name="android:windowFrame">@null</item>
+    </style>
+
+    <style name="NosePadReviewRowTitle">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@color/colorBackground</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

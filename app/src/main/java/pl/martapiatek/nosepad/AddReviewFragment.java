@@ -1,19 +1,17 @@
 package pl.martapiatek.nosepad;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.RatingBar;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,7 +25,24 @@ import java.util.ArrayList;
 import pl.martapiatek.nosepad.model.PerfumeData;
 import pl.martapiatek.nosepad.model.Review;
 
-public class AddReviewActivity extends AppCompatActivity {
+
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link AddReviewFragment.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link AddReviewFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class AddReviewFragment extends Fragment {
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
 
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
@@ -38,57 +53,53 @@ public class AddReviewActivity extends AppCompatActivity {
     private RatingBar ratingBar;
     private MultiAutoCompleteTextView multiAutoCompleteNotes;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_add_review:
-                    //    Intent intentAddReview = new Intent(MainActivity.this, AddReviewActivity.class);
-                    //   startActivity(intentAddReview);
+    public AddReviewFragment() {
+        // Required empty public constructor
+    }
 
-                    return true;
-                case R.id.navigation_show_review:
-                    Intent intentShowReviews = new Intent(AddReviewActivity.this, AllReviewsActivity.class);
-                    startActivity(intentShowReviews);
 
-                    return true;
-            }
-            return false;
-        }
-    };
+    // TODO: Rename and change types and number of parameters
+    public static AddReviewFragment newInstance(String param1, String param2) {
+        AddReviewFragment fragment = new AddReviewFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_review);
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
 
-        BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        View view = inflater.inflate(R.layout.fragment_add_review, container, false);
 
-        btnAddReview = findViewById(R.id.btnAddReview);
-        edtDescription = findViewById(R.id.edtDescription);
-        autoCompleteBrand = findViewById(R.id.autoCompleteBrand);
-        autoCompleteFragrance = findViewById(R.id.autoCompleteFragrance);
-        multiAutoCompleteNotes = findViewById(R.id.multiAutoCompleteNotes);
-        ratingBar = findViewById(R.id.ratingBar);
+        btnAddReview = view.findViewById(R.id.btnAddReview);
+        edtDescription = view.findViewById(R.id.edtDescription);
+        autoCompleteBrand = view.findViewById(R.id.autoCompleteBrand);
+        autoCompleteFragrance = view.findViewById(R.id.autoCompleteFragrance);
+        multiAutoCompleteNotes = view.findViewById(R.id.multiAutoCompleteNotes);
+        ratingBar = view.findViewById(R.id.ratingBar);
 
         PerfumeData p = new PerfumeData();
         ArrayList<String> brands = p.getBrands();
-        ArrayAdapter<String> adapterBrands = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, brands);
+        ArrayAdapter<String> adapterBrands = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, brands);
 
-        autoCompleteBrand.setThreshold(1); // liczba znaków do podpowiedzi
+        autoCompleteBrand.setThreshold(1);
         autoCompleteBrand.setAdapter(adapterBrands);
 
         ArrayList<String> notes = p.getNotes();
-        ArrayAdapter<String> adapterNotes = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, notes);
+        ArrayAdapter<String> adapterNotes = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, notes);
 
         multiAutoCompleteNotes.setThreshold(1);
         multiAutoCompleteNotes.setAdapter(adapterNotes);
         multiAutoCompleteNotes.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -113,13 +124,13 @@ public class AddReviewActivity extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(AddReviewActivity.this, "zapisano", Toast.LENGTH_SHORT).show();
+                                //  Toast.makeText(AddReviewActivity.this, "zapisano", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(AddReviewActivity.this, "błąd", Toast.LENGTH_SHORT).show();
+                                //  Toast.makeText(AddReviewActivity.this, "błąd", Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -127,6 +138,8 @@ public class AddReviewActivity extends AppCompatActivity {
         });
 
 
+        return view;
     }
+
 
 }

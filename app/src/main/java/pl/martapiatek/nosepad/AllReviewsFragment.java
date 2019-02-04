@@ -1,13 +1,14 @@
 package pl.martapiatek.nosepad;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,7 +25,22 @@ import pl.martapiatek.nosepad.adapter.ReviewAdapter;
 import pl.martapiatek.nosepad.adapter.ReviewSectionAdapter;
 import pl.martapiatek.nosepad.model.Review;
 
-public class AllReviewsActivity extends AppCompatActivity {
+
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link AllReviewsFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class AllReviewsFragment extends Fragment {
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
 
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
@@ -36,35 +52,38 @@ public class AllReviewsActivity extends AppCompatActivity {
     private ArrayList<Object> listItem;
 
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+    public AllReviewsFragment() {
+        // Required empty public constructor
+    }
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_add_review:
-                    Intent intentAddReview = new Intent(AllReviewsActivity.this, AddReviewActivity.class);
-                    startActivity(intentAddReview);
-
-                    return true;
-                case R.id.navigation_show_review:
-                    //    Intent intentShowReviews = new Intent(AllReviewsActivity.this, AllReviewsActivity.class);
-                    //   startActivity(intentShowReviews);
-
-                    return true;
-            }
-            return false;
-        }
-    };
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment AllReviewsFragment.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static AllReviewsFragment newInstance(String param1, String param2) {
+        AllReviewsFragment fragment = new AllReviewsFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_reviews);
 
+    }
 
-        BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.fragment_all_reviews, container, false);
 
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -96,11 +115,11 @@ public class AllReviewsActivity extends AppCompatActivity {
                 Log.i("CHILD", "size: " + reviews.size());
                 Log.i("CHILD", "size object: " + listItem.size());
 
-                listView = findViewById(R.id.review_list_view);
+                listView = view.findViewById(R.id.review_list_view);
                 //   adapter = new ReviewAdapter(AllReviewsActivity.this, reviews);
                 //   listView.setAdapter(adapter);
 
-                listView.setAdapter(new ReviewSectionAdapter(AllReviewsActivity.this, listItem));
+                listView.setAdapter(new ReviewSectionAdapter(getContext(), listItem));
 
             }
 
@@ -124,8 +143,7 @@ public class AllReviewsActivity extends AppCompatActivity {
 
             }
         });
-
-
+        return view;
     }
 
 }
