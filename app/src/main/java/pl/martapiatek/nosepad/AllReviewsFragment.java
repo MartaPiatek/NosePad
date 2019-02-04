@@ -92,7 +92,7 @@ public class AllReviewsFragment extends Fragment {
         reviews = new ArrayList<>();
         listItem = new ArrayList<>();
 
-        mDatabase.addChildEventListener(new ChildEventListener() {
+        mDatabase.orderByChild("brand").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Log.i("CHILD", "onChildAdded:" + dataSnapshot.getKey());
@@ -116,8 +116,11 @@ public class AllReviewsFragment extends Fragment {
                 Log.i("CHILD", "size object: " + listItem.size());
 
                 listView = view.findViewById(R.id.review_list_view);
-                //   adapter = new ReviewAdapter(AllReviewsActivity.this, reviews);
+                //  adapter = new ReviewAdapter(AllReviewsActivity.this, reviews);
                 //   listView.setAdapter(adapter);
+
+
+                //  Collections.sort(listItem);
 
                 listView.setAdapter(new ReviewSectionAdapter(getContext(), listItem));
 
@@ -143,6 +146,12 @@ public class AllReviewsFragment extends Fragment {
 
             }
         });
+
+        //  listItem.addAll(reviews);
+
+        //   listView = view.findViewById(R.id.review_list_view);
+
+        //   listView.setAdapter(new ReviewSectionAdapter(getContext(), listItem));
         return view;
     }
 
