@@ -1,6 +1,7 @@
 package pl.martapiatek.nosepad;
 
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,7 +10,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -41,7 +45,7 @@ public class AllReviewsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-
+    private Dialog dialog, dialog2;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
@@ -92,6 +96,8 @@ public class AllReviewsFragment extends Fragment {
         reviews = new ArrayList<>();
         listItem = new ArrayList<>();
 
+        listView = view.findViewById(R.id.review_list_view);
+
         mDatabase.orderByChild("brand").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -115,7 +121,7 @@ public class AllReviewsFragment extends Fragment {
                 Log.i("CHILD", "size: " + reviews.size());
                 Log.i("CHILD", "size object: " + listItem.size());
 
-                listView = view.findViewById(R.id.review_list_view);
+
                 //  adapter = new ReviewAdapter(AllReviewsActivity.this, reviews);
                 //   listView.setAdapter(adapter);
 
@@ -147,11 +153,31 @@ public class AllReviewsFragment extends Fragment {
             }
         });
 
-        //  listItem.addAll(reviews);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getContext(), "Toscik", Toast.LENGTH_SHORT).show();
 
-        //   listView = view.findViewById(R.id.review_list_view);
+                dialog = new Dialog(getActivity(), R.style.Theme_AppCompat_Dialog_Alert);
+                dialog.setContentView(R.layout.read_review);
 
-        //   listView.setAdapter(new ReviewSectionAdapter(getContext(), listItem));
+                Button btnYes = dialog.findViewById(R.id.btnEditReview);
+
+                btnYes.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View view) {
+                        // dialog.dismiss();
+                        dialog = new Dialog(getActivity(), R.style.Theme_AppCompat_Dialog_Alert);
+                        dialog.setContentView(R.layout.edit_review);
+
+                        dialog.show();
+                    }
+                });
+
+
+                //   dialog.setCancelable(false);
+                dialog.show();
+            }
+        });
         return view;
     }
 
